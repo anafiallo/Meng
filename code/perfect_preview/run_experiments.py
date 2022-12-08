@@ -23,7 +23,7 @@ if __name__ == "__main__":
     #     turbine_rotation_speed = np.sin(rad_turbine_rotation_speed)
     
     # define range of temporal horizons to assess
-    T_range = [temporal_resolution*i for i in range(5, 1800, 10)]
+    T_range = [temporal_resolution*i for i in range(5, 1800, 5)]
     T_min = T_range[0]
     T_max = T_range[-1]
 
