@@ -1,5 +1,5 @@
-# -*- coding: de_DE.UTF-8 -*-
-from perfect_preview_alg import *
+#!/usr/bin/python
+# -*- coding: utf-8 -*-from perfect_preview_alg import *
 import os
 from loguru import logger
 
