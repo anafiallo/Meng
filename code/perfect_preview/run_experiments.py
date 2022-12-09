@@ -23,13 +23,13 @@ if __name__ == "__main__":
     #     turbine_rotation_speed = np.sin(rad_turbine_rotation_speed)
     
     # define range of temporal horizons to assess
-    T_range = [temporal_resolution*i for i in range(5, 1800, 5)]
+    T_range = [temporal_resolution*i for i in range(1600, 1800, 5)]
     T_min = T_range[0]
     T_max = T_range[-1]
 
     # turbine_rotation_speed = np.sin(0.6) # math.inf
     control_type = "standard"
-    results_folder_path = os.path.join(os.getcwd(), f"experiments/pp_WHOI_lidar_h=104m_Tmin={T_min}_Tmax={T_max}_degThreshold={deg_threshold}_nacelleDegRotSpeed={deg_threshold}/")
+    results_folder_path = os.path.join(f"./experiments/pp_WHOI_lidar_h=104m_Tmin={T_min}_Tmax={T_max}_degThreshold={deg_threshold}_nacelleDegRotSpeed={deg_threshold}/")
     
     if not os.path.exists(results_folder_path):
         logger.info("Making directory path to store experiment results")

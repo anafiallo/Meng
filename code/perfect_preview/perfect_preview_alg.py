@@ -225,7 +225,7 @@ def plot_maker(model_method, t_interval_index, x_axis_range, y_axis_ranges):
 ################ PLOTTING ################
 ##########################################
 
-def plot_turbine_reactions(update_schedule_df, field_temporal_resolution, n=10, sine=True):
+def plot_turbine_reactions(update_schedule_df, temporal_resolution, n=10, sine=True):
     
     for i in range(update_schedule_df.shape[0]- 2):
         # define rows 1, 2, 3 corresponding to intervals
@@ -248,9 +248,9 @@ def plot_turbine_reactions(update_schedule_df, field_temporal_resolution, n=10, 
         print(f"ppwd : {len(ppwd_t1)}, {len(ppwd_t2)}, {len(ppwd_t3)}")
 
         # define the t range (t1, t2, t3)
-        t1 = [int(row1.T_initial) + field_temporal_resolution*i for i in range(len(ppwd_t1))]
-        t2 = [int(row2.T_initial) + field_temporal_resolution*i for i in range(len(ppwd_t2))]
-        t3 = [int(row3.T_initial) + field_temporal_resolution*i for i in range(len(ppwd_t3))]
+        t1 = [int(row1.T_initial) + temporal_resolution*i for i in range(len(ppwd_t1))]
+        t2 = [int(row2.T_initial) + temporal_resolution*i for i in range(len(ppwd_t2))]
+        t3 = [int(row3.T_initial) + temporal_resolution*i for i in range(len(ppwd_t3))]
         print(f"t : {len(t1)}, {len(t2)}, {len(t3)}")
 
         # low pass filter of forecasted wind direction
