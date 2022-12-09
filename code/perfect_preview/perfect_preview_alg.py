@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-from loguru import logger
+# from loguru import logger
 import pickle
 from utils import *
 
@@ -397,12 +397,12 @@ def duty_T_grid_search(data_df, T_range, field_temporal_resolution, deg_threshol
     duties = []
     schedules = []
     for T in T_range:
-        logger.info(f"Started experiment with T = {T}")
+        # logger.info(f"Started experiment with T = {T}")
         perfect_preview_update_schedule_df_i, duty_i = perfect_preview_control(data_df=data_df, T=T, temporal_resolution=field_temporal_resolution, deg_threshold=deg_threshold,turbine_rot_speed=turbine_rotation_speed,control_type=control_type)
         duties.append(duty_i)
         schedules.append(perfect_preview_update_schedule_df_i)
         # save_pickle(perfect_preview_update_schedule_df_i, f"{results_folder_path}schedule_df_T={T}.pickle")
-        logger.success(f"Completed experiment with T = {T}")
+        # logger.success(f"Completed experiment with T = {T}")
        
     return duties, schedules
 
@@ -421,16 +421,16 @@ def run_field_data_T_grid_search(data_df, T_range, field_temporal_resolution, de
         results = duty_T_grid_search(data_df, T_range, field_temporal_resolution, deg_threshold, turbine_rotation_speed, control_type, results_folder_path)
         duties, schedules = results
         save_pickle(schedules,f"{results_folder_path}all_schedules_df.pickle")
-        logger.success("Completed T grid search")
+        # logger.success("Completed T grid search")
     except Exception as e:
         print(e)
-        logger.error(f"Run error: {e}")
+        # logger.error(f"Run error: {e}")
 
     try:   
         plot_grid_search_results(T_range, results, field_temporal_resolution, deg_threshold, turbine_rotation_speed, control_type, graph_title=graph_title,results_folder_path=results_folder_path, sine=True)
-        logger.success("Plotted and saved T grid search results")
+        # logger.success("Plotted and saved T grid search results")
     except Exception as e:
         print("Error plotting: ", e)
-        logger.error(f"Plotting error: {e}")
+        # logger.error(f"Plotting error: {e}")
 
     return results

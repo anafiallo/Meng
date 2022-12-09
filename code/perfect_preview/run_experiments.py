@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-from perfect_preview_alg import *
 import os
-from loguru import logger
+# from loguru import logger
 # import logging
 from utils import *
 import math
@@ -37,9 +37,9 @@ if __name__ == "__main__":
     results_folder_path = "./experiments/pp_WHOI_lidar_h=104m_Tmin=" + str(T_min) + "_Tmax=" + str(T_max) + "_degThreshold="+str(deg_threshold) + "_nacelleDegRotSpeed=" + str(deg_threshold)+"/"
     
     if not os.path.exists(results_folder_path):
-        logger.info("Making directory path to store experiment results")
+        # logger.info("Making directory path to store experiment results")
         os.makedirs(results_folder_path)
 
-    logger.info("Starting run")
+    # logger.info("Starting run")
 
     lidar_pp_results= run_field_data_T_grid_search(data_df, T_range, temporal_resolution, deg_threshold, deg_turbine_rotation_speed, control_type, graph_title="Lidar H104m", results_folder_path=results_folder_path)
