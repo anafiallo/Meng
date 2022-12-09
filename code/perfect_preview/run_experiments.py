@@ -9,7 +9,7 @@ if __name__ == "__main__":
     # temporal_resolution = 60 # [seconds]
 
     ## WHOI MVCO data
-    data_df = unpickle("data/WHOI/2016_z=107m_(10, 11)-(12, 30).pickle")
+    data_df = unpickle("data/WHOI/2016_z=107m_(10, 7)-(12, 30).pickle")
     temporal_resolution = 1 # seconds
     deg_threshold = 0.0 # degrees
     rad_threshold = deg_threshold * math.pi/180
@@ -23,13 +23,13 @@ if __name__ == "__main__":
     #     turbine_rotation_speed = np.sin(rad_turbine_rotation_speed)
     
     # define range of temporal horizons to assess
-    T_range = [temporal_resolution*i for i in range(1600, 1800, 5)]
+    T_range = [temporal_resolution*i for i in range(1, 3600)]
     T_min = T_range[0]
     T_max = T_range[-1]
 
     # turbine_rotation_speed = np.sin(0.6) # math.inf
     control_type = "standard"
-    results_folder_path = f"./experiments/pp_WHOI_lidar_h=104m_Tmin={T_min}_Tmax={T_max}_degThreshold={deg_threshold}_nacelleDegRotSpeed={deg_threshold}/"
+    results_folder_path = "./experiments/pp_WHOI_lidar_h=104m_Tmin=" + str(T_min) + "_Tmax=" + str(T_max) + "_degThreshold="+str(deg_threshold) + "_nacelleDegRotSpeed=" + str(deg_threshold)+"/"
     
     if not os.path.exists(results_folder_path):
         logger.info("Making directory path to store experiment results")
