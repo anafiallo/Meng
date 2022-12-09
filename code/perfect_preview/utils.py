@@ -61,8 +61,8 @@ def convert_timestamps_to_datetime(schedule_df, t_parameters=["T_initial", "T_fi
 
 
 def open_field_data(turbine):
-    field_data_filepath = f"data/Field data/{turbine}.csv"
-    raw_field_data_df = pd.read_csv(f"{field_data_filepath}") #.rename(columns={"Unnamed: 0": "t"})
+    field_data_filepath = "data/Field data/" + str(turbine) + ".csv"
+    raw_field_data_df = pd.read_csv(str(field_data_filepath)) #.rename(columns={"Unnamed: 0": "t"})
 
     if "Lidar" in turbine:
         # converts matlab datetime to python datetime

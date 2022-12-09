@@ -217,7 +217,7 @@ def plot_maker(model_method, t_interval_index, x_axis_range, y_axis_ranges):
     axs[1].grid(True)
     
     # set title
-    plt.suptitle(f"{model_method[0]}, run {t_interval_index}, {model_method[1]}")
+    plt.suptitle(str(model_method[0]) + ", run "+ str(t_interval_index) + ", " + str(model_method[1]))
     fig.tight_layout()
 
     return axs
@@ -247,13 +247,13 @@ def plot_turbine_reactions(update_schedule_df, temporal_resolution, n=10, sine=T
         ppwd_t1 = row1["Perfect Preview Wind Direction (PPWD) (phi(t))"]
         ppwd_t2 = row2["Perfect Preview Wind Direction (PPWD) (phi(t))"]
         ppwd_t3 = row3["Perfect Preview Wind Direction (PPWD) (phi(t))"]
-        print(f"ppwd : {len(ppwd_t1)}, {len(ppwd_t2)}, {len(ppwd_t3)}")
+        # print(f"ppwd : {len(ppwd_t1)}, {len(ppwd_t2)}, {len(ppwd_t3)}")
 
         # define the t range (t1, t2, t3)
         t1 = [int(row1.T_initial) + temporal_resolution*i for i in range(len(ppwd_t1))]
         t2 = [int(row2.T_initial) + temporal_resolution*i for i in range(len(ppwd_t2))]
         t3 = [int(row3.T_initial) + temporal_resolution*i for i in range(len(ppwd_t3))]
-        print(f"t : {len(t1)}, {len(t2)}, {len(t3)}")
+        # print(f"t : {len(t1)}, {len(t2)}, {len(t3)}")
 
         # low pass filter of forecasted wind direction
         lpf_t1 =  [row1["Low-pass-filter of PPWD (mean phi)"]]*len(t1) 
@@ -277,8 +277,8 @@ def plot_turbine_reactions(update_schedule_df, temporal_resolution, n=10, sine=T
             yaw_error_t2 = abs(np.arcsin(row2["Delta Degree"])*180/math.pi)
             yaw_error_t3 = abs(np.arcsin(row3["Delta Degree"])*180/math.pi)
 
-        print(f"yaw error: {len(yaw_error_t1)}, {len(yaw_error_t2)}, {len(yaw_error_t3)}")
-        print([*yaw_error_t1, *yaw_error_t2])
+        # print(f"yaw error: {len(yaw_error_t1)}, {len(yaw_error_t2)}, {len(yaw_error_t3)}")
+        # print([*yaw_error_t1, *yaw_error_t2])
         # define axes limits
         x_axis_range = [row1.T_initial, row3.T_final]
         turbine_control_y_limits = [min([*ppwd_t1, *ppwd_t2, *ppwd_t3, *lpf_t1, *lpf_t2, *lpf_t3, *turbine_pos_t1, *turbine_pos_t2, *turbine_pos_t3]), \
@@ -317,7 +317,7 @@ def plot_turbine_reactions(update_schedule_df, temporal_resolution, n=10, sine=T
             if i > n:
                 break
         except:
-            print(f"Skipping plots for run {i}")
+            print("Skipping plots for run ", i)
             continue
 
 ##########################################
@@ -385,13 +385,13 @@ def plot_grid_search_results(T_range, results, field_temporal_resolution, deg_th
             elif metric == "Std Dev Yaw Error":
                 plt.plot(T_range, std_dev_yaw_errors, color=color)
 
-        plt.suptitle(f"Effect of Varying T Forecasting Horizons on the {metric}", y=1, fontsize=12)
+        plt.suptitle("Effect of Varying T Forecasting Horizons on the " + str(metric), y=1, fontsize=12)
         if turbine_rotation_speed != math.inf and sine:
             turbine_rotation_speed = np.arcsin(turbine_rotation_speed)*180/math.pi
-        plt.title(f"Field Data (1 min resolution) [threshold[°]={deg_threshold}°, control={control_type}, rot.speed[°/s]={turbine_rotation_speed},]", fontsize=10)
+        plt.title("Field Data (1 min resolution) [threshold[°]=" + str(deg_threshold) +"°, control=" + str(control_type) + ", rot.speed[°/s]=" + str(turbine_rotation_speed) + "]", fontsize=10)
         plt.xlabel("T time horizon (s)")
-        plt.ylabel(f"{metric}")
-        plt.savefig(f"{results_folder_path}{graph_title}_{control_type}_{metric.strip()}_T_threshold={deg_threshold}.png")
+        plt.ylabel(str(metric))
+        plt.savefig(str(results_folder_path) + str(graph_title)+"_"+ str(control_type) + "_" + str(metric.strip()) + "_T_threshold=" + str(deg_threshold)+".png")
 
 def duty_T_grid_search(data_df, T_range, field_temporal_resolution, deg_threshold, turbine_rotation_speed, control_type="standard",results_folder_path="../experiments/"):
     duties = []
@@ -420,7 +420,7 @@ def run_field_data_T_grid_search(data_df, T_range, field_temporal_resolution, de
     try: 
         results = duty_T_grid_search(data_df, T_range, field_temporal_resolution, deg_threshold, turbine_rotation_speed, control_type, results_folder_path)
         duties, schedules = results
-        save_pickle(schedules,f"{results_folder_path}all_schedules_df.pickle")
+        save_pickle(schedules,str(results_folder_path)+"all_schedules_df.pickle")
         # logger.success("Completed T grid search")
     except Exception as e:
         print(e)
