@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-from perfect_preview_alg import *
 import os
 from loguru import logger
+# import logging
+from utils import *
+import math
+from perfect_preview_alg import *
 
 if __name__ == "__main__":
     ## India Wind Farm data
